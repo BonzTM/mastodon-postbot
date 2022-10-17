@@ -1,6 +1,9 @@
 # Mastodon Postbot
 This is currently a WIP hacky script for posting to Mastodon, based off of [Tootbot](https://github.com/cquest/tootbot)
 
+## Source
+https://github.com/BonzTM/mastodon-postbot
+
 ## Features
 Will take a Twitter User or Twitter Search and post them natively on Mastodon.
 - Includes grabbing and posting embedded photos, multiple embedded photos, or embedded videos directly into the post.

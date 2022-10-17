@@ -42,10 +42,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: |
-            latest
-            $BUILD_DATE
-            type=sha
+          tags: 
+            bonztm/mastodon-postbot:latest,bonztm/mastodon-postbot:$BUILD_DATE
+
 
       - name: Remove docker context
         if: always()

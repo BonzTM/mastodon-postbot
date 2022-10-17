@@ -1,0 +1,54 @@
+name: Build Mastodon Postbot Image
+on:
+  push:
+    branches:
+      - "main"
+    paths:
+      - "mastodon_postbot.py"
+  schedule:
+    - cron: "0 0 * * SUN"
+  workflow_dispatch:
+
+jobs:
+  build-mastodon-postbot-image:
+    runs-on: self-hosted
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set build date
+        run: |
+          echo "BUILD_DATE=$(date --rfc-3339=date)" >> ${GITHUB_ENV}
+          echo "DOCKERHUB_REPO=bonztm/mastodon-postbot" >> ${GITHUB_ENV}
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: bonztm
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Create docker context
+        run: |
+          docker context create mastodon-postbot
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          endpoint: mastodon-postbot
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: |
+            latest
+            $BUILD_DATE
+            type=sha
+
+      - name: Remove docker context
+        if: always()
+        run: docker context rm mastodon-postbot
+
+

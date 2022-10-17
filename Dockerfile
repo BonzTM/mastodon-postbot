@@ -7,4 +7,4 @@ ADD requirements.txt /app/
 RUN pip install --upgrade pip
 RUN pip install -r /app/requirements.txt
 
-CMD python mastodon-postbot.py
+CMD python mastodon_postbot.py

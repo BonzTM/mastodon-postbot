@@ -3,10 +3,6 @@ on:
   push:
     branches:
       - "main"
-    paths:
-      - "mastodon_postbot.py"
-      - "Dockerfile"
-      - "requirements.txt"
   schedule:
     - cron: "0 0 * * SUN"
   workflow_dispatch:

@@ -2,7 +2,7 @@ FROM python:3-alpine
 
 RUN mkdir /app
 WORKDIR /app
-ADD mastodon-postbot.py /app/
+ADD mastodon_postbot.py /app/
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 

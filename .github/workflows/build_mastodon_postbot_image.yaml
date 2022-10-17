@@ -41,7 +41,7 @@ jobs:
           context: .
           push: true
           tags: 
-            $DOCKERHUB_REPO:latest,$DOCKERHUB_REPO:$BUILD_DATE
+            ${{ env.DOCKERHUB_REPO }}:latest,${{ env.DOCKERHUB_REPO }}:${{ env.BUILD_DATE }}
 
       - name: Remove docker context
         if: always()

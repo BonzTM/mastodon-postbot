@@ -15,6 +15,9 @@ jobs:
   build-mastodon-postbot-image:
     runs-on: self-hosted
 
+    env:
+      DOCKERHUB_REPO: bonztm/mastodon-postbot
+
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
@@ -39,8 +42,6 @@ jobs:
           endpoint: mastodon-postbot
 
       - name: Build and push
-        env:
-          DOCKERHUB_REPO: bonztm/mastodon-postbot
         uses: docker/build-push-action@v3
         with:
           context: .
@@ -50,3 +51,12 @@ jobs:
       - name: Remove docker context
         if: always()
         run: docker context rm mastodon-postbot
+
+      - name: Update Dockerhub Description
+        uses: peter-evans/dockerhub-description@v3
+        with:
+          username: bonztm
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: ${{ env.DOCKERHUB_REPO }}
+          readme-filepath: README.md
+          short-description: ${{ github.event.repository.description }}

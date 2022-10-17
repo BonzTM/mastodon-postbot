@@ -6,7 +6,8 @@ Will take a Twitter User or Twitter Search and post them natively on Mastodon.
 - Includes grabbing and posting embedded photos, multiple embedded photos, or embedded videos directly into the post.
 
 ## Example Posts
-[CleGuardians on Mastodon.land](https://mastodon.land/@cleguardians)
+- [CleGuardians on Mastodon.land](https://mastodon.land/@cleguardians)
+- [PlayNewWorld on botsin.space](https://botsin.space/@playnewworld)
 
 ## Docker Image
 https://hub.docker.com/r/bonztm/mastodon-postbot

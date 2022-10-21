@@ -2,9 +2,9 @@ name: Build Mastodon Postbot Image
 on:
   push:
     branches:
-      - "main"
+      - main
   schedule:
-    - cron: "0 0 * * SUN"
+    - cron: '0 0 * * SUN'
   workflow_dispatch:
 
 jobs:

@@ -79,8 +79,11 @@ def main():
                 mastodon_api = Mastodon(access_token=access_token,
                                         api_base_url=f'https://{instance}')
 
-                soup = BeautifulSoup(t['content_html'])
-                c = soup.blockquote.text
+                try:
+                    soup = BeautifulSoup(t['content_html'])
+                    c = soup.blockquote.text
+                except Exception as e:
+                    raise
                 post_media = []
                 media_embed = {}
                 author_string = t['_rssbridge']['username']
@@ -130,12 +133,12 @@ def main():
                                     pass
 
                 # replace short links by original URL
-                m = re.search(r"http[^ \xa0]*", c)
-                if m is not None:
-                    l = m.group(0)
-                    r = requests.get(l, allow_redirects=False)
-                    if r.status_code in {301, 302}:
-                        c = c.replace(l, r.headers.get('Location'))
+                # m = re.search(r"http[^ \xa0]*", c)
+                # if m is not None:
+                #     l = m.group(0)
+                #     r = requests.get(l, allow_redirects=False)
+                #     if r.status_code in {301, 302}:
+                #         c = c.replace(l, r.headers.get('Location'))
 
                 # remove pic.twitter.com links
                 m = re.search(r"pic.twitter.com[^ \xa0]*", c)
